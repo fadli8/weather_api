@@ -48,7 +48,6 @@ class forecastAsk extends Command
         }else{
             return $this->warn('thank you for choosing a number between 0 and 1');
         }
-        
 
         $response = Http::get("https://api.openweathermap.org/data/2.5/forecast?q=$city,$country&units=$unit&appid=ae9b6288ec7564dc8d72018287bb5456");
         $res = json_decode($response->body(), true);
@@ -62,8 +61,6 @@ class forecastAsk extends Command
         $mess .= "> Weather: ".$res['list'][0]['weather'][0]['description']."\n";
         $mess .= "> Temperature: ".$res['list'][0]['main']['temp'] . ($unit == "imperial"?" °F\n":"°C\n");
         $mess .= "\n";
-
-        // return $this->info($mess);
 
         for ($i = 1; $i < count($res['list']); $i++) {
             if($counter < $days){

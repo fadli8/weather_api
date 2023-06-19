@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/weather', [weatherController::class,'getData']);
-Route::get('/five', [weatherController::class,'dataOfFiveDays']);
+Route::get('/current', [weatherController::class,'currentWeather']);
+Route::get('/forecast', [weatherController::class,'forecast']);
+Route::get('/forecast/adk', [weatherController::class,'dataOfFiveDays']);
