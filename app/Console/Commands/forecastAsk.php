@@ -12,7 +12,7 @@ class forecastAsk extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:ask {city=Santander},{country_code=ES}';
+    protected $signature = 'forecast:ask {location=Santander,ES}';
 
     /**
      * The console command description.
@@ -28,9 +28,10 @@ class forecastAsk extends Command
      */
     public function handle()
     {
-        
-        $city = $this->argument('city');
-        $country = $this->argument('country_code');
+        $location = $this->argument('location');
+        $res = explode(",", $location);
+        $city = $res[0];
+        $country = $res[1];   
         
         $days = $this->ask('How many days to forecast?');
         if($days < 1 || $days > 5){

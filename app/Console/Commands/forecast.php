@@ -12,7 +12,8 @@ class forecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast {city=Santander} {country_code=ES} {--d|days=1 } {--u|units=metric}';
+    // protected $signature = 'forecast {city=Santander} {country_code=ES} {--d|days=1 } {--u|units=metric}';
+    protected $signature = 'forecast {location=Santander,ES} {--d|days=1 } {--u|units=metric}';
 
     /**
      * The console command description.
@@ -28,8 +29,12 @@ class forecast extends Command
      */
     public function handle()
     {
-        $city = $this->argument('city');
-        $country = $this->argument('country_code');
+
+        $location = $this->argument('location');
+        $res = explode(",", $location);
+        $city = $res[0];
+        $country = $res[1];
+        
         $days = $this->option('days');
         $unit = $this->option('units');
 

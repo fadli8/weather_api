@@ -12,7 +12,8 @@ class current extends Command
      *
      * @var string
      */
-    protected $signature = 'current {city=Santander} {country_code=ES} {--u|units=metric|imperial }';
+    // protected $signature = 'current {city=Santander},{country_code=ES} {--u|units=metric}';
+    protected $signature = 'current {location=Santander,ES} {--u|units=metric}';
 
     /**
      * The console command description.
@@ -28,8 +29,12 @@ class current extends Command
      */
     public function handle()
     {
-        $city = $this->argument('city');
-        $country = $this->argument('country_code');
+        
+        $location = $this->argument('location');
+        $res = explode(",", $location);
+        $city = $res[0];
+        $country = $res[1];
+
         $unit = $this->option('units');
 
         $response = Http::get("https://api.openweathermap.org/data/2.5/weather?q=$city,$country&units=$unit&appid=ae9b6288ec7564dc8d72018287bb5456");
